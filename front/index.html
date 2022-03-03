@@ -10,6 +10,7 @@
     inserire password:
     <input type="password" id="pwd" placeholder="password" />
     <button id="b1">invia</button>
+    <button id="b2">registrati</button>
     <script>
       $("#b1").click(function () {
         var mail = $("#mail").val();
@@ -18,6 +19,28 @@
           $.ajax({
             url:
               "http://localhost:3000/api/login?mail=" +
+              mail +
+              "&password=" +
+              password,
+            method: "GET",
+            success: function (data) {
+              console.log("success", data);
+              $("body").css("background-color","green");
+            },
+            error: function (data) {
+              console.log("error", data);
+              $("body").css("background-color","red");
+            },
+          });
+        }
+      });
+      $("#b2").click(function () {
+        var mail = $("#mail").val();
+        var password = $("#pwd").val();
+        if (mail && password) {
+          $.ajax({
+            url:
+              "http://localhost:3000/api/reg?mail=" +
               mail +
               "&password=" +
               password,
